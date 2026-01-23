@@ -12,7 +12,7 @@ public class Main {
 
         List<String> tarefas = new ArrayList<>();
 
-        System.out.format("""
+        out.format("""
                     1 - Adicionar tarefa
                     2 - Listar tarefas
                     3 - Remover tarefa
@@ -25,25 +25,26 @@ public class Main {
             switch (opcao) {
                 case 1 -> {
                     sc.nextLine(); // limpar o buffer
-                    System.out.println("Adicione uma tarefa");
+                    out.println("Adicione uma tarefa");
                     String novaTarefa = sc.nextLine();
 
                     tarefas.add(novaTarefa);
-                    System.out.println("Tarefa adicionada com sucesso");
+                    out.println("Tarefa adicionada com sucesso");
 
                 }
                 case 2 -> {
-                    for (String bloco : tarefas) {
-                        System.out.println(bloco);
+                    out.println("--- Lista de tarefas ---");
+                    for (int i = 0; i < tarefas.size(); i++) {
+                        out.println(i + " - " + tarefas.get(i));
                     }
                 }
                 case 3 -> {
 
                 }
                 case 4 -> {
-                    System.out.println("Encerrando o programa");
+                    out.println("Encerrando o programa");
                 }
-                default -> System.out.println("Opção inválida");
+                default -> out.println("Opção inválida");
             }
         }
     }
