@@ -8,20 +8,22 @@ public class Main {
     public static void main(String[] args) {
 
         Scanner sc = new Scanner(System.in);
-        int continuar = 0;
+        int opcao = 0;
 
         List<String> tarefas = new ArrayList<>();
 
-        out.format("""
+        while (opcao != 5) {
+
+            out.format("""
                     1 - Adicionar tarefa
                     2 - Listar tarefas
                     3 - Remover tarefa
-                    4 - sair
+                    4 - Limpar lista de tarefas
+                    5 - sair
                     """);
 
-        while (continuar != 4) {
+            opcao = sc.nextInt();
 
-            int opcao = sc.nextInt();
             switch (opcao) {
                 case 1 -> {
                     sc.nextLine(); // limpar o buffer
@@ -29,23 +31,40 @@ public class Main {
                     String novaTarefa = sc.nextLine();
 
                     tarefas.add(novaTarefa);
-                    out.println("Tarefa adicionada com sucesso");
+                    out.println("Tarefa adicionada com sucesso!");
 
                 }
                 case 2 -> {
                     out.println("--- Lista de tarefas ---");
-                    for (int i = 0; i < tarefas.size(); i++) {
-                        out.println(i + " - " + tarefas.get(i));
+                    if (tarefas.isEmpty()) {
+                        out.println("Nenhuma tarefa foi adicionada!");
+                    } else {
+                        for (int i = 0; i < tarefas.size(); i++) {
+                            out.println("Tarefa " + (i + 1) + ": " + tarefas.get(i));
+                        }
                     }
                 }
                 case 3 -> {
+                    out.println("Digite o numero da tarefa que deseja remover: ");
 
+                    int indiceRemover = sc.nextInt() - 1;
+
+                    if (indiceRemover >= 0 && indiceRemover < tarefas.size()) {
+                        String tarefaRemover = tarefas.remove(indiceRemover);
+                        out.println("A tarefa '" + tarefaRemover + "' removida com sucesso!");
+                    } else {
+                        out.println("Numero invalido!");
+                    }
                 }
                 case 4 -> {
-                    out.println("Encerrando o programa");
+                        tarefas.clear();
+                        out.println("Lista limpada com sucesso!");
                 }
+                case 5 ->  out.println("Encerrando o programa...");
+
                 default -> out.println("Opção inválida");
             }
         }
+        sc.close();
     }
 }
